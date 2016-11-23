@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Data.Models.TaskData>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<h2>List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Müşteri
+        </th>
+        <th>
+            Vakka Başlığı
+        </th>
+        <th>
+            Vakka Açıklaması
+        </th>
+        <th>
+            Tarih
+        </th>
+        <th> Tamamlayan Kullanıcı  </th>
+   
+        <th> Tamamlanma Notu</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.CustomerData.FirstName @item.CustomerData.LastName
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.CreateDate
+            </td>
+            <td>
+                @{
+                    if (item.UserData != null)
+                    {
+                        <span>@item.UserData.FirstName @item.UserData.LastName</span>
+                    }
+                }
+            </td>
+            <td>
+                @item.CompletingNote
+            </td>
+
+            <td>
+                @Html.ActionLink("Tamamla", "Edit", new { taskId = item.ID })
+            </td>
+        </tr>
+                    }
+
+</table>
